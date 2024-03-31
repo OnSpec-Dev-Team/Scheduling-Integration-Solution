@@ -88,26 +88,26 @@ pipeline {
                 // Prepare the message
                 def message = (currentBuild.result == 'SUCCESS') ? "Build Warnings for ${env.PROJECT_NAME}_${env.TARGET_BRANCH_NAME.toLowerCase()}:${env.BUILD_NUMBER}" : "Build failed Errors for ${env.PROJECT_NAME}_${env.TARGET_BRANCH_NAME.toLowerCase()}:${env.BUILD_NUMBER}"
                 // Command to upload the file to Slack
-                //sh "curl -F file=@${env.LOGS_DIR}/TeamSyncbuild.log -F 'initial_comment=${message}' -F channels=C06Q1Q1LY83 -H 'Authorization: Bearer xoxb-2103621248087-6831857532868-v1sPfcqA4OwBqoutmvEhOSqd' https://slack.com/api/files.upload"
+                sh "curl -F file=@${env.LOGS_DIR}/Scheduling-Integration-Solution.log -F 'initial_comment=${message}' -F channels=scheduling-integration-solution -H 'Authorization: Bearer xoxb-2103621248087-6831857532868-v1sPfcqA4OwBqoutmvEhOSqd' https://slack.com/api/files.upload"
             }
         }
         }
         success {
-            slackSend(channel: '#teamsync', message: "SUCCESS: The build of ${env.PROJECT_NAME}:${env.BUILD_NUMBER} on branch ${env.TARGET_BRANCH_NAME} succeeded. http://172.20.21.78:5010/")
+            slackSend(channel: '#scheduling-integration-solution', message: "SUCCESS: The build of ${env.PROJECT_NAME}:${env.BUILD_NUMBER} on branch ${env.TARGET_BRANCH_NAME} succeeded. http://172.20.21.78:5010/")
             script {
                 // Prepare a success message
                 def message = "Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}  - ${env.TARGET_BRANCH_NAME} - http://172.20.21.78:5010/"
                 // Send the message to Microsoft Teams
-                //sh "curl -H 'Content-Type: application/json' -d '{\"text\": \"${message}\"}' https://onspecengineeringco.webhook.office.com/webhookb2/03b78d4a-d328-4727-8aad-34f4f0f7ae7a@eb724109-80c2-4d15-a49e-97c78636f620/JenkinsCI/a91a80391a284252935875bbad7e1b41/81c2c87b-b9ec-4978-a6a8-b013d83916fc"
+                sh "curl -H 'Content-Type: application/json' -d '{\"text\": \"${message}\"}' https://onspecengineeringco.webhook.office.com/webhookb2/0bee4405-6d57-4401-b982-5b0fa13e8355@eb724109-80c2-4d15-a49e-97c78636f620/JenkinsCI/196abfcad7204c71bd93ac0a2c8670a2/81c2c87b-b9ec-4978-a6a8-b013d83916fc"
             }
         }
         failure {
-            slackSend(channel: '#teamsync', message: "FAILURE: The build of ${env.PROJECT_NAME}:${env.BUILD_NUMBER} on branch ${env.TARGET_BRANCH_NAME} failed.")
+            slackSend(channel: '#scheduling-integration-solution', message: "FAILURE: The build of ${env.PROJECT_NAME}:${env.BUILD_NUMBER} on branch ${env.TARGET_BRANCH_NAME} failed.")
             script {
                 // Prepare a failure message
                 def message = "Build FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL} - ${env.TARGET_BRANCH_NAME}"
                 // Send the message to Microsoft Teams
-                //sh "curl -H 'Content-Type: application/json' -d '{\"text\": \"${message}\"}' https://onspecengineeringco.webhook.office.com/webhookb2/03b78d4a-d328-4727-8aad-34f4f0f7ae7a@eb724109-80c2-4d15-a49e-97c78636f620/JenkinsCI/a91a80391a284252935875bbad7e1b41/81c2c87b-b9ec-4978-a6a8-b013d83916fc"
+                sh "curl -H 'Content-Type: application/json' -d '{\"text\": \"${message}\"}' https://onspecengineeringco.webhook.office.com/webhookb2/0bee4405-6d57-4401-b982-5b0fa13e8355@eb724109-80c2-4d15-a49e-97c78636f620/JenkinsCI/196abfcad7204c71bd93ac0a2c8670a2/81c2c87b-b9ec-4978-a6a8-b013d83916fc"
             }
         }
     }
