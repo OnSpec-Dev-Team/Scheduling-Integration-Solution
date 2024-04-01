@@ -9,8 +9,8 @@ pipeline {
         PROJECT_NAME = 'Scheduling-Integration-Solution'
         DOTNET_CLI_HOME = '/home/sysadmin'
         TARGET_BRANCH_NAME = 'master-API-Gateway'
-        PORTS_HTTP = '5018'
-        PORTS_HTTPS = '5019'
+        PORTS_HTTP = '33018'
+        PORTS_HTTPS = '33019'
     }
     stages {
         stage('Conditional Execution') {
