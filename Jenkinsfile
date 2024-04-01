@@ -9,8 +9,8 @@ pipeline {
         PROJECT_NAME = 'Scheduling-Integration-Solution'
         DOTNET_CLI_HOME = '/home/sysadmin'
         TARGET_BRANCH_NAME = 'master-LIMS'
-        PORTS_HTTP = '5016'
-        PORTS_HTTPS = '5017'
+        PORTS_HTTP = '33016'
+        PORTS_HTTPS = '33017'
     }
     stages {
         stage('Conditional Execution') {
