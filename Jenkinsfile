@@ -48,7 +48,7 @@ pipeline {
         stage('Dockerize') {
             steps {
                 script {
-                    IMAGE_NAME = "${env.PROJECT_NAME.toLowerCase()}:${env.BUILD_NUMBER}"
+                    IMAGE_NAME = "${env.PROJECT_NAME.toLowerCase()}_${env.TARGET_BRANCH_NAME.toLowerCase()}:${env.BUILD_NUMBER}"
                 }
                 sh """
                   docker image prune -a -f
@@ -61,7 +61,7 @@ pipeline {
         stage('Cleanup Containers') {
             steps {
                 script {
-                    CONTAINER_NAME = "${env.PROJECT_NAME.toLowerCase()}_${env.TARGET_BRANCH_NAME.toLowerCase()}-container"
+                    CONTAINER_NAME = "${env.PROJECT_NAME.toLowerCase()}-${env.TARGET_BRANCH_NAME.toLowerCase()}-container"
                     def command = "docker ps -aq -f name=^${CONTAINER_NAME}\\\$"
                     def containerExists = sh(script: command, returnStdout: true).trim()
                     if (containerExists) {
@@ -77,7 +77,7 @@ pipeline {
         stage('Run Application') {
             steps {
                 script {
-                    CONTAINER_NAME = "${env.PROJECT_NAME.toLowerCase()}-container"
+                    CONTAINER_NAME = "${env.PROJECT_NAME.toLowerCase()}-${env.TARGET_BRANCH_NAME.toLowerCase()}-container"
                 }
                 sh "docker run -d -p ${PORTS_HTTP}:80 -p ${PORTS_HTTPS}:443 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
             }
