@@ -8,7 +8,7 @@ pipeline {
         LOGS_DIR = '/home/sysadmin/Logs'
         PROJECT_NAME = 'Scheduling-Integration-Solution'
         DOTNET_CLI_HOME = '/home/sysadmin'
-        TARGET_BRANCH_NAME = 'jenkins'
+        TARGET_BRANCH_NAME = 'master'
     }
     stages {
         stage('Conditional Execution') {
