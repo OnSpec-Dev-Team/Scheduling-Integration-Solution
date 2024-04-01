@@ -4,7 +4,7 @@ pipeline {
         pollSCM('H/2 * * * *')
     }
     environment {
-        BUILD_DIR = '/home/sysadmin/Builds/Scheduling-Integration-Solution'
+        BUILD_DIR = '/home/sysadmin/Builds/Scheduling-Integration-Solution/master'
         LOGS_DIR = '/home/sysadmin/Logs'
         PROJECT_NAME = 'Scheduling-Integration-Solution'
         DOTNET_CLI_HOME = '/home/sysadmin'
