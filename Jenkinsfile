@@ -48,7 +48,7 @@ pipeline {
         stage('Dockerize') {
             steps {
                 script {
-                    IMAGE_NAME = "${env.PROJECT_NAME.toLowerCase()}:${env.BUILD_NUMBER}"
+                    IMAGE_NAME = "${env.PROJECT_NAME.toLowerCase()}_${env.TARGET_BRANCH_NAME.toLowerCase()}:${env.BUILD_NUMBER}"
                 }
                 sh """
                   docker image prune -a -f
@@ -77,7 +77,7 @@ pipeline {
         stage('Run Application') {
             steps {
                 script {
-                    CONTAINER_NAME = "${env.PROJECT_NAME.toLowerCase()}-container"
+                    CONTAINER_NAME = "${env.PROJECT_NAME.toLowerCase()}-${env.TARGET_BRANCH_NAME.toLowerCase()}-container"
                 }
                 sh "docker run -d -p ${PORTS_HTTP}:80 -p ${PORTS_HTTPS}:443 --name ${CONTAINER_NAME} ${IMAGE_NAME}"
             }
